@@ -1,0 +1,36 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+	
+</script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+	
+</script>
+<body>
+
+	<div th:replace="header :: client_header"></div>
+	<div class="container">
+		<table class="table table-hover">
+			<tr class="bg-dark text-white">
+				<th>ID</th>
+				<th>Brand Name</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Amount</th>
+			</tr>
+			<tr th:each="item:${list}">
+				<td th:text="${item.ItemID}"></td>
+				<td th:text=${item.brandname}></td>
+				<td th:text=${item.price}></td>
+				<td th:text=${item.qty}></td>
+				<td th:text=${item.amount}></td>
+				<td><a th:href="@{/cart/removeById(id=${item.ItemID})}">Remove</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

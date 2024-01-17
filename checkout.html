@@ -1,0 +1,97 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+	
+</script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+	
+</script>
+<body>
+
+	<div th:replace="header :: client_header"></div>
+	<div class="container">
+		<table class="table table-hover">
+			<tr class="bg-dark text-white">
+				<th>ID</th>
+				<th>Brand Name</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Amount</th>
+			</tr>
+			<tr th:each="item:${list}">
+				<td th:text="${item.ItemID}"></td>
+				<td th:text=${item.brandname}></td>
+				<td th:text=${item.price}></td>
+				<td th:text=${item.qty}></td>
+				<td th:text=${item.amount}></td>
+			</tr>
+		</table>
+		<div>
+			<p align="center"
+				style="background-color: green; font-size: 20px; font-style: oblique;">
+				Please Enter your Shipping Information 
+		</div>
+		
+		<form th:action="@{/chkout/saveOrder}" method="POST">
+			<div>
+			<table>
+			
+			<tr>
+			<td>Name: </td> <td><input type="text" id="ContactName" name="ContactName" required /></td>
+			</tr>
+			<tr>
+			<td>Address: </td> <td><input type="text" id="Address" name="Address" required /></td>
+			</tr>
+			<tr>
+			<td>Phone: </td> <td><input type="text" id="Phone" name="Phone" required /></td>
+			</tr>
+			<tr>
+			<td>Email Address: </td> <td><input type="email" id="Email" name="Email" required /></td>
+			</tr>
+			</table>
+			</div>
+			<p align="center"
+				style="background-color: green; font-size: 20px; font-style: oblique;">
+				Please Enter your Billing Information</p>
+			<div>
+			<table>	
+			<tr>
+				
+				<td>Credit Card:</td>
+				<td>	
+				<div class="dropdown">
+				<button class="btn btn-primary dropdown-toggle" type="button"
+						data-toggle="dropdown">
+						Select- <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="#">Visa</a></li>
+						<li><a href="#">Master</a></li>
+						
+					</ul>
+				</div></td>
+				</tr>
+				<tr>
+				<td>Credit Card Number: </td>
+				<td><input type="text" id="CreditCartNumber" name="CreditCartNumber" required></td>
+					</tr>
+					<tr>
+				<td><button class="btn btn-success">Complete Order</button></td>
+				</tr>
+			</div>
+			</table>
+		</form>
+	</div>
+	</div>
+	<script type="text/javascript">
+	$(".dropdown-menu li a").click(function(){
+		  var selText = $(this).text();
+		  $(this).parents('.dropdown').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+		});
+	</script>
+</body>
+</html>
